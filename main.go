@@ -17,6 +17,7 @@ import (
 	"strings"
 	"sync/atomic"
 	"time"
+	"crypto/tls"
 )
 
 var BalanceAPI = "https://ec2-18-218-197-117.us-east-2.compute.amazonaws.com/balance?address=%s"
@@ -45,8 +46,12 @@ func init() {
 	if err != nil {
 		return
 	}
-	//HttpClient = SSClient(&http.Client{Timeout: time.Second})
-	HttpClient = &http.Client{Timeout: time.Second}
+	 HttpClient = &http.Client{
+        Timeout: time.Second,
+        Transport: &http.Transport{
+            TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+        },
+    }
 }
 
 func main() {
