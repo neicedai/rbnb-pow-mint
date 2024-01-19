@@ -19,7 +19,7 @@ import (
 	"time"
 )
 
-var BalanceAPI = "https://ec2-18-217-135-255.us-east-2.compute.amazonaws.com/balance?address=%s"
+var BalanceAPI = "https://ec2-18-218-197-117.us-east-2.compute.amazonaws.com/balance?address=%s"
 
 var (
 	MintCount  atomic.Uint64
@@ -139,7 +139,7 @@ func sendTX(body string) {
 	//Transport: tp,
 	//}
 	var data = strings.NewReader(body)
-	req, err := http.NewRequest("POST", "https://ec2-18-217-135-255.us-east-2.compute.amazonaws.com/validate", data)
+	req, err := http.NewRequest("POST", "https://ec2-18-218-197-117.us-east-2.compute.amazonaws.com/validate", data)
 	if err != nil {
 		log.Error(err)
 		return
@@ -220,7 +220,7 @@ type ApiResponse struct {
 
 func getBalance(address string) int {
 	client := &http.Client{}
-	url := "https://ec2-18-217-135-255.us-east-2.compute.amazonaws.com/balance?address=" + address
+	url := "https://ec2-18-218-197-117.us-east-2.compute.amazonaws.com/balance?address=" + address
 
 	for {
 		req, err := http.NewRequest("GET", url, nil)
